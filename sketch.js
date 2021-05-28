@@ -38,7 +38,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(600, 200);
+  createCanvas(displayWidth, displayHeight);
   
   trex = createSprite(50,180,20,50);
   
@@ -46,7 +46,7 @@ function setup() {
   trex.addAnimation("collided", trex_collided);
   trex.scale = 0.5;
   
-  ground = createSprite(200,180,400,20);
+  ground = createSprite(displayWidth/2,180,displayWidth,20);
   ground.addImage("ground",groundImage);
   ground.x = ground.width /2;
   ground.velocityX = -(6 + 3*score/100);
@@ -74,8 +74,8 @@ function setup() {
 
 function draw() {
   //trex.debug = true;
-  camera.x = trex.x;
-  gameOver.position.x = restart.position.x = camera.x;
+  //camera.x = trex.x;
+  //gameOver.position.x = restart.position.x = camera.x;
 
 
   background(255);
@@ -88,6 +88,7 @@ function draw() {
     trex.changeAnimation("running", trex_running);
     
     if(keyDown("space") && trex.y >= 159) {
+      camera.position.x = trex.x;
       trex.velocityY = -12;
       jumpSound.play();
     }
